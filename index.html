@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(to bottom, #b4a987, #e6e0d8); /* Light and soft gradient */
+            color: #5f564d; /* Maintain text readability */
+        }
+
+        .container {
+            max-width: 768px;
+            margin: 50px auto;
+            background-color: #fdfcf9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .header-banner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .header-banner span {
+            background: linear-gradient(135deg, #dccbb6, #b8a190); /* Elegant gradient */
+            border: 2px solid #fff;
+            padding: 20px 40px; /* Increase padding for a luxurious feel */
+            border-radius: 50px; /* Softer, more rounded edges */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), inset 0 -2px 10px rgba(255, 255, 255, 0.2);
+            font-family: 'Great Vibes', cursive;
+            font-size: 32px; /* Increase font size for emphasis */
+            color: #ffffff; /* Light text for contrast */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* THE RECIPIENT DESIGN */
+        .personalized-greeting {
+            text-align: center;
+            margin: 20px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px; /* Slightly smaller than the header banner */
+            color: #5f564d; /* Neutral text color to match the theme */
+        }
+
+        .personalized-greeting .guest-name {
+            font-family: 'Great Vibes', cursive; /* Different font for elegance */
+            font-size: 28px; /* Slightly larger for emphasis */
+            color: #b85c38; /* Highlight the guest's name in a unique color */
+            font-weight: bold; /* Make it stand out */
+        }
+
+        /* Add glowing effect */
+        .header-banner span::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: -1;
+        }
+
+        .header-banner span:hover::after {
+            opacity: 1; /* Glow effect on hover */
+        }
+
+        /* Add decorative snowflakes */
+        .header-banner span::before {
+            content: '❄'; /* Decorative snowflake */
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            animation: rotate 6s linear infinite;
+        }
+
+        .header-banner span::after {
+            content: '❄';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            animation: rotate 6s linear infinite reverse;
+        }
+
+        /* Animation for snowflakes */
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .image-section {
+            text-align: center;
+            margin: 40px 0 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-in-out 0.4s;
+        }
+
+        .image-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .couple-names {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 36px;
+            font-weight: bold;
+            font-family: 'Great Vibes', cursive;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-in-out 0.6s;
+        }
+
+        .couple-names.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-in-out 0.8s;
+        }
+
+        .actions.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .actions button {
+            padding: 15px 30px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #d1c4b2;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-family: 'Great Vibes', cursive;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+        }
+
+        .actions button:hover {
+            background-color: #b5a491;
+            transform: scale(1.05);
+        }
+
+        .section-three {
+            max-width: 768px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fdfcf9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-in-out 1s;
+        }
+
+        .section-three.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-three h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .section-three p {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #5f564d;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+            gap: 15px; /* Space between images */
+        }
+
+        .album-grid img {
+            width: 100%; /* Ensure all images fit the grid cells */
+            height: 200px; /* Fixed height for uniformity */
+            object-fit: cover; /* Maintain aspect ratio and crop excess */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .album-grid img.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .calendar-section {
+            max-width: 768px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: #fdfcf9;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            border-radius: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-in-out 1.2s;
+        }
+
+        .calendar-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .calendar-header .icon {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: #d7bdbb;
+            border-radius: 50%;
+            line-height: 50px;
+            text-align: center;
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        .calendar {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            font-size: 20px;
+            color: #5f564d;
+        }
+
+        .calendar th {
+            padding: 10px 0;
+            font-size: 18px;
+        }
+
+        .calendar td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .calendar tbody td.active {
+            position: relative;
+        }
+
+        .calendar tbody td.active::before {
+            content: '';
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            background-color: #dccbb6;
+            clip-path: path("M30 55C47 35 60 28 60 15C60 7.5 53 1 45 1C38 1 33 6 30 12C27 6 22 1 15 1C7 1 0 7.5 0 15C0 28 13 35 30 55Z");
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .calendar tbody td.active span {
+            position: relative;
+            color: #dc0e0e;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .location-section {
+            text-align: center;
+            margin-top: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease-in-out 1.4s;
+        }
+
+        .location-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .location-section h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .location-section p {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .location-section img {
+            max-width: 60%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-section a {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #5f564d;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .location-section a img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: block; /* Ensure it takes full width */
+            margin: 0 auto; /* Center the image */
+        }
+
+        .location-section a img:hover {
+            transform: scale(1.05); /* Slight zoom effect */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+        }
+        @media screen and (max-width: 768px) {
+            /* Add decorative snowflakes */
+            .header-banner span::before {
+                content: ''; /* Decorative snowflake */
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                font-size: 18px;
+                color: rgba(255, 255, 255, 0.8);
+                animation: rotate 6s linear infinite;
+            }
+            .container {
+                padding: 20px;
+            }
+
+            .header-banner span {
+                font-size: 20px;
+                padding: 10px 20px;
+            }
+
+            .couple-names {
+                font-size: 28px;
+            }
+
+            .actions button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+
+            .section-three h2 {
+                font-size: 28px;
+            }
+
+            .section-three p {
+                font-size: 16px;
+            }
+
+            .album-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+
+            .calendar {
+                font-size: 16px;
+            }
+
+            .calendar th {
+                font-size: 14px;
+            }
+
+            .calendar td {
+                padding: 10px;
+            }
+
+            .location-section h2 {
+                font-size: 28px;
+            }
+
+            .location-section p {
+                font-size: 16px;
+            }
+
+            .location-section a {
+                font-size: 16px;
+            }
+            .calendar tbody td.active::before {
+                content: '';
+                position: absolute;
+                top: 87%;
+                left: 71%;
+                width: 60px;
+                height: 60px;
+                background-color: #dccbb6;
+                clip-path: path("M20 37C31.3 23.3 40 18.7 40 10C40 5 35.3 0.7 30 0.7C25.3 0.7 22 4 20 8C18 4 14.7 0.7 10 0.7C4.7 0.7 0 5 0 10C0 18.7 8.7 23.3 20 37Z");
+                transform: translate(-50%, -50%);
+                z-index: 0;
+            }
+            .album-grid {
+                grid-template-columns: 1fr; /* Single-column layout */
+            }
+
+            .album-grid img {
+                width: 100%; /* Ensure images are fully responsive */
+                height: auto; /* Maintain the aspect ratio */
+                border-radius: 8px; /* Slightly round corners for a softer look */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+                transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add hover effect */
+            }
+
+            .album-grid img:hover {
+                transform: scale(1.05); /* Slight zoom effect on hover */
+                box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+            }
+        }
+        /* RSVP Button Container */
+        .rsvp-button-container {
+            position: fixed; /* Fixed at the bottom for both mobile and desktop */
+            bottom: 0;
+            width: 100%; /* Full width for mobile */
+            background-color: #e6e0d8; /* Match site theme */
+            text-align: center;
+            padding: 10px 0; /* Padding for better click area */
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 9999; /* Ensure it stays on top */
+        }
+
+        /* RSVP Button Styling */
+        #rsvp-button {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #b85c38; /* Elegant brown color */
+            border: none;
+            border-radius: 20px;
+            padding: 15px 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%; /* Default button width for mobile */
+            max-width: 300px; /* Limit button width on desktop */
+        }
+
+        #rsvp-button:hover {
+            background-color: #9e4b2f;
+            transform: scale(1.05); /* Slight zoom effect */
+        }
+
+        /* Desktop View: Position the button to the bottom-right inside the beige area */
+        @media screen and (min-width: 768px) {
+            .rsvp-button-container {
+                width: auto; /* Shrink to fit the content */
+                position: relative; /* Positioned relative to the container */
+                right: 20px; /* Offset from the right */
+                bottom: 20px; /* Offset from the bottom */
+                background: none; /* Remove background for desktop */
+                box-shadow: none; /* Remove shadow for desktop */
+                padding: 0;
+            }
+
+            #rsvp-button {
+                width: auto; /* Remove full width for desktop */
+            }
+        }
+        /* POP UP MENU */
+        .popup {
+            display: none;
+            position: sticky; /* Ensures it's relative to the button position */
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            width: 300px; /* Adjust size to match the empty square */
+            height: 150px; /* Adjust height for symmetrical layout */
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s ease-in-out;
+            padding: 15px;
+        }
+
+        .popup.visible {
+            display: block;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .popup-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .popup-content {
+            text-align: center;
+        }
+
+        .popup textarea {
+            width: 90%; /* Fits inside the popup */
+            height: 50px; /* Adjust height for a compact design */
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        .popup img.qr-code {
+            width: 120px; /* Smaller QR code */
+            height: 120px;
+            margin: 0 auto; /* Center it inside */
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .overlay.visible {
+            display: block;
+            opacity: 1;
+        }
+
+        /* QR Code Style */
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        @media screen and (max-width: 768px) {
+            .popup {
+                position: sticky;
+            }
+        }
+        .quote-section {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #e6e0d8; /* Soft background color to highlight the quote */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+            margin: 40px auto;
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before, .quote-section::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, #dccbb6, #b8a190, #dccbb6); /* Elegant gradient bar */
+            top: 0;
+            left: 0;
+        }
+
+        .quote-section::after {
+            top: auto;
+            bottom: 0;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px; /* Larger, more visible font */
+            font-weight: bold; /* Make it stand out */
+            color: #5f564d; /* Neutral, visible color */
+            line-height: 1.8;
+            margin: 0;
+            letter-spacing: 1px; /* Slight spacing for elegance */
+            opacity: 0;
+            animation: fadeIn 2s ease forwards, zoomIn 2s ease forwards;
+        }
+
+        /* Fade-in effect */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Zoom-in effect */
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+
+    <!-- SNOW EFFECT -->
+    <style>
+        /* Add this to your existing CSS */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: #ffffff; /* Pure white for contrast */
+            font-size: 10px;
+            z-index: 9999;
+            pointer-events: none;
+            animation: fall linear infinite;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 255, 255, 0.5); /* Add glow */
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-10px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+        </style>
+        
+        <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+        
+            document.querySelectorAll(".container, .header-banner, .image-section, .couple-names, .actions, .section-three, .calendar-section, .location-section, .album-grid img").forEach((el) => {
+                observer.observe(el);
+            });
+        
+            // Updated snowfall logic
+            const createSnowflake = () => {
+                const snowflake = document.createElement("div");
+                snowflake.classList.add("snowflake");
+                snowflake.textContent = "❄";
+                snowflake.style.left = Math.random() * 100 + "vw";
+                snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+                snowflake.style.fontSize = Math.random() * 10 + 10 + "px";
+                snowflake.style.opacity = Math.random();
+                const colors = ["#ffffff", "#dceefb", "#fde2e4", "#ffe5b4"];
+                snowflake.style.color = colors[Math.floor(Math.random() * colors.length)];
+        
+                document.body.appendChild(snowflake);
+        
+                setTimeout(() => {
+                    snowflake.remove();
+                }, 5000); // Remove snowflake after it exits screen
+            };
+        
+            setInterval(createSnowflake, 100); // Create snowflakes at regular intervals
+        });
+        </script>
+        
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+
+            document.querySelectorAll(".container, .header-banner, .image-section, .couple-names, .actions, .section-three, .calendar-section, .location-section, .album-grid img").forEach((el) => {
+                observer.observe(el);
+            });
+        });
+    </script>
+    
+    <!-- EMAILJS DECLARAION -->
+    <!-- Include EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Initialize EmailJS with your public key
+        (function () {
+            emailjs.init("pQE21BCRHdizRjEsz"); // Replace with your actual public key
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-banner">
+            <span>29/12 - Chủ Nhật</span>
+        </div>
+        <div class="personalized-greeting">
+            <p>Trân trọng kính mời <span class="guest-name">Chị Sử Linh</span></p>
+        </div>        
+        <div class="image-section">
+            <img src="assets/images/061A8058.JPG" alt="Wedding Photo">
+        </div>
+        <div class="couple-names">
+            Mộng Vân <span class="icon">&#x1F48D;</span> Anh Kha
+        </div>
+        <div class="section-two">
+            <div class="actions">
+                <div class="actions">
+                    <button id="btn-loi-chuc"><span>&#x1F4AC;</span> Gửi lời chúc</button>
+                    <button id="confirmation"><span>&#x1F4E8;</span> Xác nhận tham dự</button>
+                    <button id="btn-mung-cuoi"><span>&#x1F4B0;</span> Mừng cưới</button>
+                </div>                
+                <!-- RSVP BUTTON -->
+                <script>
+                    document.getElementById("confirmation").addEventListener("click", (event) => {
+                        event.preventDefault(); // Prevent default button behavior
+    
+                        const guestName = "chị Sử Linh"; // Replace with dynamic data if necessary
+                        console.log("Sending RSVP for guest:", guestName);
+    
+                        // Use EmailJS to send the email
+                        emailjs
+                            .send("service_lc5n11b", "template_yo8pzwb", {
+                                guest_name: guestName, // Match template variable
+                            })
+                            .then(
+                                function (response) {
+                                    console.log("Email Sent Successfully:", response);
+                                    alert("RSVP confirmation sent! Thank you for your participation.");
+                                },
+                                function (error) {
+                                    console.error("EmailJS Error Details:", error);
+                                    alert("Failed to send RSVP. Please try again.");
+                                }
+                            );
+                    });
+                </script>
+            </div>
+            <!-- Popup for "Gửi lời chúc" -->
+            <div class="popup" id="popup-loi-chuc">
+                <div class="popup-header">Gửi lời chúc</div>
+                <div class="popup-content">
+                    <textarea rows="3" placeholder="Nhập lời chúc của bạn..."></textarea>
+                    <button id="send-loi-chuc">Gửi</button>
+                </div>
+            </div>
+
+            <!-- Popup for "Mừng cưới" -->
+            <div class="popup" id="popup-mung-cuoi">
+                <div class="popup-header">Mừng cưới</div>
+                <div class="popup-content">
+                    <img class="qr-code" src="assets/images/qr-code.png" alt="QR Code">
+                    <p>Quét mã QR để mừng cưới!</p>
+                </div>
+            </div>
+
+            <!-- Add this in your body where you want the quote section -->
+            <div class="quote-section">
+                <p class="quote-text">Gia Đình Chúng Tôi Thật Sự Rất Mong Chị Đến Chung Vui Với Chúng Em</p>
+            </div>            
+
+            <!-- Overlay -->
+            <div class="overlay" id="overlay"></div>
+            <script>
+                const btnLoiChuc = document.querySelector(".actions button:nth-child(1)");
+                const btnMungCuoi = document.querySelector(".actions button:nth-child(3)");
+                const popupLoiChuc = document.getElementById("popup-loi-chuc");
+                const popupMungCuoi = document.getElementById("popup-mung-cuoi");
+                const overlay = document.getElementById("overlay");
+                const sendLoiChuc = document.getElementById("send-loi-chuc");
+                const closeMungCuoi = document.getElementById("close-mung-cuoi");
+              
+                // Show popup
+                function showPopup(button, popup) {
+                  const buttonRect = button.getBoundingClientRect();
+                  popup.style.top = `${buttonRect.top - popup.offsetHeight - 10}px`; // Position above the button
+                  popup.style.left = `${buttonRect.left}px`; // Align with button's left
+                  popup.classList.add("visible");
+                  overlay.classList.add("visible");
+                }
+              
+                // Hide popup
+                function hidePopup(popup) {
+                  popup.classList.remove("visible");
+                  overlay.classList.remove("visible");
+                }
+              
+                // Gửi lời chúc popup
+                btnLoiChuc.addEventListener("click", () => {
+                  showPopup(btnLoiChuc, popupLoiChuc);
+                });
+              
+                sendLoiChuc.addEventListener("click", () => {
+                  alert("Lời chúc của bạn đã được gửi. Cảm ơn!");
+                  hidePopup(popupLoiChuc);
+                });
+              
+                // Mừng cưới popup
+                btnMungCuoi.addEventListener("click", () => {
+                  showPopup(btnMungCuoi, popupMungCuoi);
+                });
+              
+                closeMungCuoi.addEventListener("click", () => {
+                  hidePopup(popupMungCuoi);
+                });
+              
+                // Overlay click to close all popups
+                overlay.addEventListener("click", () => {
+                  hidePopup(popupLoiChuc);
+                  hidePopup(popupMungCuoi);
+                });
+              </script>                                           
+        </div>
+        <div class="section-three">
+            <h2>Album Hình Cưới</h2>
+            <p>Sự gì Thiên Chúa đã kết hợp, loài người không được <bold>PHÂN LY</bold>. (Mt 19, 3-12)</p>
+            <div class="album-grid">
+                <img src="assets/images/2.jpeg" alt="Wedding Photo 1">
+                <img src="assets/images/4.jpeg" alt="Wedding Photo 2">
+                <img src="assets/images/5.jpeg" alt="Wedding Photo 3">
+                <img src="assets/images/6.jpeg" alt="Wedding Photo 4">
+                <img src="assets/images/7.jpeg" alt="Wedding Photo 5">
+                <img src="assets/images/8.jpeg" alt="Wedding Photo 6">
+                <img src="assets/images/9.jpeg" alt="Wedding Photo 7">
+                <img src="assets/images/10.jpeg" alt="Wedding Photo 8">
+                <img src="assets/images/11.jpg" alt="Wedding Photo 9">
+            </div>
+        </div>
+        <div class="calendar-section">
+            <div class="calendar-header">
+                <div class="icon">🎀</div>
+                <div>THÁNG 12 / 2024</div>
+            </div>
+            <table class="calendar">
+                <thead>
+                    <tr>
+                        <th>Thứ 2</th>
+                        <th>Thứ 3</th>
+                        <th>Thứ 4</th>
+                        <th>Thứ 5</th>
+                        <th>Thứ 6</th>
+                        <th>Thứ 7</th>
+                        <th>CN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>14</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td>16</td>
+                        <td>17</td>
+                        <td>18</td>
+                        <td>19</td>
+                        <td>20</td>
+                        <td>21</td>
+                        <td>22</td>
+                    </tr>
+                    <tr>
+                        <td>23</td>
+                        <td>24</td>
+                        <td>25</td>
+                        <td>26</td>
+                        <td>27</td>
+                        <td>28</td>
+                        <td class="active"><span>29</span></td>
+                    </tr>
+                    <tr>
+                        <td>30</td>
+                        <td>31</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>            
+        </div>
+        <div class="location-section">
+            <h2>Location / Địa điểm</h2>
+            <p>
+                Trung tâm hội nghị tiệc cưới <strong>The Adora Premium</strong><br>
+                803 Đ. Nguyễn Văn Linh, Tân Phú, Quận 7, Hồ Chí Minh 72908<br>
+                Tiệc sẽ đón khách vào lúc <strong>17:30 ngày 29/12</strong>.
+            </p>
+            <!-- Wrap the image in an <a> tag -->
+            <a href="https://maps.app.goo.gl/6aPmzHt5YJy8m2Dn9" target="_blank">
+                <img src="assets/images/location.png" alt="Location Map">
+            </a>
+            <!-- <a href="https://maps.app.goo.gl/6aPmzHt5YJy8m2Dn9" target="_blank">View on Google Maps</a> -->
+        </div>
+    </div>
+            <!-- RSVP Button -->
+            <!-- <div class="rsvp-button-container">
+                <button id="rsvp-button">Tôi sẽ tham gia</button>
+            </div> -->
+
+            <!-- RSVP Button -->
+            <!-- <div class="rsvp-button-container">
+                <button id="rsvp-button" type="button">Tôi sẽ tham gia</button>
+            </div>      -->
+            <!-- RSVP SCRIPTS -->            
+            <!-- RSVP Button Script -->
+            <script>
+                document.getElementById("rsvp-button").addEventListener("click", (event) => {
+                    event.preventDefault(); // Prevent default button behavior
+
+                    const guestName = "chị Sử Linh"; // Replace with dynamic data if necessary
+                    console.log("Sending RSVP for guest:", guestName);
+
+                    // Use EmailJS to send the email
+                    emailjs
+                        .send("service_lc5n11b", "template_yo8pzwb", {
+                            guest_name: guestName, // Match template variable
+                        })
+                        .then(
+                            function (response) {
+                                console.log("Email Sent Successfully:", response);
+                                alert("RSVP confirmation sent! Thank you for your participation.");
+                            },
+                            function (error) {
+                                console.error("EmailJS Error Details:", error);
+                                alert("Failed to send RSVP. Please try again.");
+                            }
+                        );
+                });
+            </script>
+</body>
+</html>
